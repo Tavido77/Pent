@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - DECIDE</title>
+  <title>Counselor Login - DECIDE</title>
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="styles/login.css" />
 </head>
@@ -15,14 +15,20 @@
   </header>
 
   <main class="login-container">
+    <div class="quote-section">
+      <blockquote>
+        "The greatest good you can do for another is not just to share your riches but to reveal to him his own."
+      </blockquote>
+      <cite>Benjamin Disraeli</cite>
+    </div>
     <div class="login-box">
-      <h2>Welcome Back</h2>
-      <p class="subtitle">Log in to your account to continue</p>
+      <h2>Counselor Login</h2>
+      <p class="subtitle">Access your counselor dashboard</p>
       
-      <form id="loginForm" class="login-form">
+      <form id="counselorLoginForm" class="login-form">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="Enter your email">
+          <input type="email" id="email" name="email" required placeholder="Enter your professional email">
         </div>
         
         <div class="form-group">
@@ -44,7 +50,7 @@
       </button>
 
       <p class="signup-prompt">
-        Don't have an account? <a href="#">Sign up</a>
+        Not registered as a counselor? <a href="#">Apply Now</a>
       </p>
     </div>
   </main>
@@ -53,6 +59,6 @@
     <p>&copy; 2025 DECIDE · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
   </footer>
 
-  <script src="scripts/login.js"></script>
+  <script src="scripts/counselor-login.js"></script>
 </body>
 </html>

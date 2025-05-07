@@ -30,6 +30,11 @@ header {
   letter-spacing: 1px;
 }
 
+.login-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
 .login-btn {
   padding: 0.5rem 1rem;
   border: 1px solid #2e7d32;
@@ -37,6 +42,23 @@ header {
   color: #2e7d32;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #2e7d32;
+  color: #fff;
+}
+
+.login-btn.counselor {
+  border-color: #1565c0;
+  color: #1565c0;
+}
+
+.login-btn.counselor:hover {
+  background: #1565c0;
+  color: #fff;
 }
 
 .hero {

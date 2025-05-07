@@ -2,18 +2,56 @@
   min-height: calc(100vh - 180px);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('https://images.unsplash.com/photo-1442544213729-6a15f1611937?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.quote-section {
+  color: white;
+  max-width: 500px;
   padding: 2rem;
-  background: #f8faf8;
+}
+
+.quote-section blockquote {
+  font-size: 2rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.quote-section cite {
+  font-size: 1.1rem;
+  font-style: normal;
+  opacity: 0.9;
 }
 
 .login-box {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 2.5rem;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+header {
+  padding: 1rem 2rem;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+header .logo {
+  color: white;
 }
 
 .login-box h2 {

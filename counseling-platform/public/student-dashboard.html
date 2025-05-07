@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - DECIDE</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" type="module"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <a href="index.html" class="logo">DECIDE</a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-bell"></i>
+                <img src="https://i.pravatar.cc/150?img=32" alt="Profile">
+            </div>
+        </header>
+
+        <!-- Overview Section -->
+        <section class="cards-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Next Session</h3>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="next-session">
+                    <p class="date">June 25, 2025</p>
+                    <p class="time">2:00 PM</p>
+                    <p class="counselor">Dr. Sarah Johnson</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Progress Overview</h3>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="progress-stats">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Wellness Score</h3>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="wellness-score">
+                    <h2>85%</h2>
+                    <p>+5% from last week</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Appointments -->
+        <section class="appointments">
+            <div class="card-header">
+                <h3 class="card-title">Upcoming Appointments</h3>
+                <button class="btn-schedule">Schedule New</button>
+            </div>
+            <div class="appointment-list">
+                <div class="appointment-item">
+                    <img src="https://i.pravatar.cc/150?img=44" alt="Dr. Sarah" class="counselor-avatar">
+                    <div class="appointment-info">
+                        <h4 class="counselor-name">Dr. Sarah Johnson</h4>
+                        <p class="appointment-time">June 25, 2025 - 2:00 PM</p>
+                    </div>
+                    <span class="appointment-status status-upcoming">Upcoming</span>
+                </div>
+
+                <div class="appointment-item">
+                    <img src="https://i.pravatar.cc/150?img=47" alt="Dr. Michael" class="counselor-avatar">
+                    <div class="appointment-info">
+                        <h4 class="counselor-name">Dr. Michael Chen</h4>
+                        <p class="appointment-time">July 2, 2025 - 3:30 PM</p>
+                    </div>
+                    <span class="appointment-status status-upcoming">Upcoming</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <div class="card-header">
+                <h3 class="card-title">Your Progress</h3>
+                <select class="time-filter">
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                </select>
+            </div>
+            <div class="progress-chart">
+                <canvas id="monthlyProgressChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        // Progress Chart
+        const progressCtx = document.getElementById('progressChart').getContext('2d');
+        new Chart(progressCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Remaining'],
+                datasets: [{
+                    data: [75, 25],
+                    backgroundColor: ['#2e7d32', '#e0e0e0'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%'
+            }
+        });
+
+        // Monthly Progress Chart
+        const monthlyCtx = document.getElementById('monthlyProgressChart').getContext('2d');
+        new Chart(monthlyCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Wellness Score',
+                    data: [65, 70, 68, 72, 75, 85],
+                    borderColor: '#2e7d32',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="scripts/student-dashboard.js" type="module"></script>
+</body>
+</html>
