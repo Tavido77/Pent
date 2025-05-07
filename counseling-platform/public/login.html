@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - DECIDE</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/login.css" />
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a href="index.html" class="logo">DECIDE</a>
+    </div>
+  </header>
+
+  <main class="login-container">
+    <div class="login-box">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Log in to your account to continue</p>
+      
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Enter your password">
+          <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-submit">Log In</button>
+      </form>
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <button class="google-login">
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google">
+        Continue with Google
+      </button>
+
+      <p class="signup-prompt">
+        Don't have an account? <a href="#">Sign up</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DECIDE · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+  </footer>
+
+  <script src="scripts/login.js"></script>
+</body>
+</html>
