@@ -1,5 +1,9 @@
+// Import Firebase modules
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics.js';
+
 // Firebase configuration
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyB7U7EaZyISnP7LndvBtPsqm92h6lq0DgI",
   authDomain: "decide-be3b8.firebaseapp.com",
   projectId: "decide-be3b8",
@@ -10,10 +14,7 @@ export const firebaseConfig = {
 };
 
 // Initialize Firebase
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export { app, analytics };
+export { app, firebaseConfig, analytics };

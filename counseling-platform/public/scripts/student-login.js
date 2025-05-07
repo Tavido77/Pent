@@ -1,23 +1,8 @@
 // Import Firebase modules
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+import { app } from './firebase-config.js';
 
-// Firebase configuration
-const firebaseConfig = {
-    projectId: "decide-be3b8",
-    // Add other config values from your Firebase console
-    // apiKey, authDomain, etc.
-};
-
-console.log('Initializing Firebase...');
-let app;
-try {
-    app = initializeApp(firebaseConfig);
-    console.log('Firebase initialized successfully');
-} catch (error) {
-    console.error('Error initializing Firebase:', error);
-}
-
+console.log('Setting up authentication...');
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
