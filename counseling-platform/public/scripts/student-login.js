@@ -1,6 +1,7 @@
 // Import Firebase modules
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 import { app } from './firebase-config.js';
+import { AuthUtils } from './auth-utils.js';
 
 console.log('Setting up authentication...');
 const auth = getAuth(app);
@@ -8,13 +9,22 @@ const provider = new GoogleAuthProvider();
 
 console.log('Auth service initialized');
 
-// Email/Password Login
 // Check if already logged in
-auth.onAuthStateChanged((user) => {
+auth.onAuthStateChanged(async (user) => {
     console.log('Auth state changed:', user ? 'User logged in' : 'No user');
     if (user) {
-        console.log('Redirecting to dashboard...');
-        window.location.href = 'student-dashboard.html';
+        try {
+            await AuthUtils.verifyStudentRole(user);
+            console.log('Student verified, redirecting to dashboard...');
+            AuthUtils.showNotification('Login successful! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'student-dashboard.html';
+            }, 1000);
+        } catch (error) {
+            console.error('Role verification error:', error);
+            AuthUtils.showNotification(error.message, 'error');
+            await signOut(auth);
+        }
     }
 });
 
@@ -34,13 +44,17 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const user = userCredential.user;
     console.log('Login successful:', user.email);
     
-    // TODO: Check if user is a student in your database
-    // For now, we'll redirect to student dashboard
-    console.log('Redirecting to dashboard...');
-    window.location.href = 'student-dashboard.html';
+    await AuthUtils.verifyStudentRole(user);
+    AuthUtils.showNotification('Login successful! Redirecting...', 'success');
+    setTimeout(() => {
+        window.location.href = 'student-dashboard.html';
+    }, 1000);
   } catch (error) {
     console.error('Login error:', error);
-    alert(error.message);
+    AuthUtils.showNotification(error.message, 'error');
+    if (auth.currentUser) {
+        await signOut(auth);
+    }
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = 'Log In';
@@ -53,19 +67,18 @@ document.querySelector('.google-login').addEventListener('click', async function
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
     
-    // TODO: Check if Google user is a student in your database
-    // For now, we'll redirect to student dashboard
-    window.location.href = 'student-dashboard.html';
+    await AuthUtils.verifyStudentRole(user);
+    AuthUtils.showNotification('Login successful! Redirecting...', 'success');
+    setTimeout(() => {
+        window.location.href = 'student-dashboard.html';
+    }, 1000);
   } catch (error) {
     console.error('Google login error:', error);
-    alert(error.message);
+    AuthUtils.showNotification(error.message, 'error');
+    if (auth.currentUser) {
+        await signOut(auth);
+    }
   }
 });
 
-// Check if user is already logged in
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, redirect to dashboard
-    window.location.href = 'student-dashboard.html';
-  }
-});
+

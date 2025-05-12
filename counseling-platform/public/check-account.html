@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Account Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .instructions {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        pre {
+            background: #eee;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Account Status Check</h1>
+    <div class="instructions">
+        <h2>Instructions:</h2>
+        <ol>
+            <li>First, sign in using the student login page</li>
+            <li>Then, open this page to see your account details</li>
+            <li>Check the browser console for complete account information</li>
+        </ol>
+    </div>
+    <div id="status">Checking account status...</div>
+    <script src="scripts/check-account.js" type="module"></script>
+</body>
+</html>

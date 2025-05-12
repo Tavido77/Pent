@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Life - Counselor Dashboard</title>
+    <link rel="stylesheet" href="styles/counselor-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" type="module"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <div class="brand">
+                <img src="images/mental-life-logo.png" alt="Mental Life" class="logo">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-tab="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="patients">
+                        <i class="fas fa-user-friends"></i>
+                        <span>My Patients</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="calendar">
+                        <i class="fas fa-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="performance">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Performance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="checklists">
+                        <i class="fas fa-tasks"></i>
+                        <span>Checklists</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h1>Hello, <span class="counselor-name">Laura</span></h1>
+                    <p class="date">Today is Monday, 20 October 2021</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <div class="search-input-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search patients, sessions...">
+                        </div>
+                        <button class="btn-add-patient">
+                            <i class="fas fa-plus"></i>
+                            Add New Patient
+                        </button>
+                        <div class="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="overview-section">
+                    <div class="overview-card">
+                        <h3>Today's Schedule</h3>
+                        <div class="schedule-list">
+                            <!-- Schedule items will be loaded dynamically -->
+                        </div>
+                        <div class="income-chart" id="incomeChart"></div>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-content">
+                            <h3>Need Help?</h3>
+                            <p>Our support team is here to assist you 24/7</p>
+                            <button class="btn-contact-support">
+                                <i class="fas fa-headset"></i>
+                                Contact Support
+                            </button>
+                        </div>
+                        <div class="support-illustration">
+                            <i class="fas fa-life-ring fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="patients-section">
+                    <div class="section-header">
+                        <h3>Your Patients Today</h3>
+                        <a href="#" class="see-all">See All</a>
+                    </div>
+                    <div class="patients-timeline">
+                        <!-- Patient appointments will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <div class="session-types">
+                        <div class="section-header">
+                            <h3>Session Types</h3>
+                            <a href="#" class="see-all">See All</a>
+                        </div>
+                        <div class="session-chart" id="sessionChart"></div>
+                    </div>
+
+                    <div class="patient-info">
+                        <h3>Patients Information</h3>
+                        <div class="gender-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Female</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill female" style="width: 85%"></div>
+                                </div>
+                                <span class="stat-value">85%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Male</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill male" style="width: 15%"></div>
+                                </div>
+                                <span class="stat-value">15%</span>
+                            </div>
+                        </div>
+                        <div class="patient-count">
+                            <div class="total-patients">
+                                <div class="count-gauge">56</div>
+                                <span>Total Patients</span>
+                            </div>
+                            <div class="patient-breakdown">
+                                <div class="breakdown-item">
+                                    <span class="count">14</span>
+                                    <span class="label">New Patients</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="count">42</span>
+                                    <span class="label">Old Patients</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Patients Section -->
+            <section class="tab-pane" data-tab="patients">
+                <div class="patients-container">
+                    <div class="patients-header">
+                        <h2>My Patients</h2>
+                        <div class="patient-filters">
+                            <select class="status-filter">
+                                <option value="all">All Patients</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                            <button class="btn-primary">
+                                <i class="fas fa-plus"></i> Add Patient
+                            </button>
+                        </div>
+                    </div>
+                    <div class="patients-grid">
+                        <!-- Patient cards will be loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section class="tab-pane" data-tab="messages">
+                <div class="messages-container">
+                    <div class="chat-list">
+                        <!-- Patient chat list will be loaded dynamically -->
+                    </div>
+                    <div class="chat-area">
+                        <div class="chat-header">
+                            <img src="https://i.pravatar.cc/150?img=44" alt="Patient">
+                            <div>
+                                <h3>John Doe</h3>
+                                <span class="status">Online</span>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Messages will be loaded dynamically -->
+                        </div>
+                        <div class="chat-input" id="chatForm">
+                            <textarea id="messageInput" placeholder="Type your message here..." rows="1"></textarea>
+                            <button id="sendMessage" class="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="tab-pane" data-tab="analytics">
+                <div class="analytics-container">
+                    <div class="analytics-header">
+                        <h2>Practice Analytics</h2>
+                        <div class="date-range">
+                            <button class="btn-secondary active">Week</button>
+                            <button class="btn-secondary">Month</button>
+                            <button class="btn-secondary">Year</button>
+                        </div>
+                    </div>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>Total Sessions</h3>
+                            <div class="analytics-chart">
+                                <canvas id="sessionsChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Patient Progress</h3>
+                            <div class="analytics-chart">
+                                <canvas id="progressChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Session Types</h3>
+                            <div class="analytics-chart">
+                                <canvas id="typesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="tab-pane" data-tab="settings">
+                <div class="settings-container">
+                    <h2>Account Settings</h2>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>Profile Information</h3>
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" value="Dr. Sarah Johnson">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" value="sarah.johnson@decide.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Specialization</label>
+                                    <input type="text" value="Clinical Psychology">
+                                </div>
+                                <button type="submit" class="btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                        <div class="settings-card">
+                            <h3>Availability</h3>
+                            <form id="availabilityForm">
+                                <div class="form-group">
+                                    <label>Working Hours</label>
+                                    <div class="hours-input">
+                                        <input type="time" value="09:00">
+                                        <span>to</span>
+                                        <input type="time" value="17:00">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Days Available</label>
+                                    <div class="days-select">
+                                        <label><input type="checkbox" checked> Monday</label>
+                                        <label><input type="checkbox" checked> Tuesday</label>
+                                        <label><input type="checkbox" checked> Wednesday</label>
+                                        <label><input type="checkbox" checked> Thursday</label>
+                                        <label><input type="checkbox" checked> Friday</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-primary">Update Schedule</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script type="module" src="scripts/api-config.js"></script>
+    <script type="module" src="scripts/firebase-config.js"></script>
+    <script type="module" src="scripts/chat-service.js"></script>
+    <script type="module" src="scripts/sessions-service.js"></script>
+    <script type="module" src="scripts/counselor-dashboard.js"></script>
+</body>
+</html>
